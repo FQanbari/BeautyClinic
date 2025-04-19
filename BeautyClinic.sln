@@ -7,6 +7,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{AD64DB07-EF1
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BeautyClinic.API", "src\BeautyClinic.API\BeautyClinic.API.csproj", "{8E513EF5-9631-476A-8AE6-230D3CB80827}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{F6711FD1-1C48-4A8D-9111-0097B2C6E21E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BeautyClinic.API.Test.Integration", "tests\BeautyClinic.API.Test.Integration\BeautyClinic.API.Test.Integration.csproj", "{56A9A4C1-E501-46F8-8D52-D4616D7787A5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -17,11 +21,16 @@ Global
 		{8E513EF5-9631-476A-8AE6-230D3CB80827}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8E513EF5-9631-476A-8AE6-230D3CB80827}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8E513EF5-9631-476A-8AE6-230D3CB80827}.Release|Any CPU.Build.0 = Release|Any CPU
+		{56A9A4C1-E501-46F8-8D52-D4616D7787A5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{56A9A4C1-E501-46F8-8D52-D4616D7787A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{56A9A4C1-E501-46F8-8D52-D4616D7787A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{56A9A4C1-E501-46F8-8D52-D4616D7787A5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{8E513EF5-9631-476A-8AE6-230D3CB80827} = {AD64DB07-EF17-4661-84D8-157F9F898C3E}
+		{56A9A4C1-E501-46F8-8D52-D4616D7787A5} = {F6711FD1-1C48-4A8D-9111-0097B2C6E21E}
 	EndGlobalSection
 EndGlobal

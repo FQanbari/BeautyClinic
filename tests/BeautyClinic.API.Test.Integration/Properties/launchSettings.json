@@ -1,0 +1,12 @@
+{
+  "profiles": {
+    "BeautyClinic.API.Test.Integration": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "applicationUrl": "https://localhost:32801;http://localhost:32802"
+    }
+  }
+}
