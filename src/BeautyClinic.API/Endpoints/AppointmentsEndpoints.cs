@@ -1,7 +1,5 @@
 ﻿using BeautyClinic.API.Features.Appointments.GetAppointments;
 using BeautyClinic.API.Features.Appointments.SaveAppointment;
-using MediatR;
-using Microsoft.AspNetCore.Mvc;
 
 namespace BeautyClinic.API.Endpoints;
 
@@ -20,35 +18,53 @@ public class AppointmentsEndpoints : IEndpoints
     {
         app.MapPost($"${BaseRoute}/GetAppointments", GetAppointments)
             .WithName("GetAppointments")
-            //.Accepts<GetAppointmentsQuery>(ContentType)
+            //.Accepts<GetAppointmentsRequestDto>(ContentType)
             .Produces<ApiResponse<List<AppointmentDto>>>(200)
             .WithTags(Tag);
 
         app.MapPost($"${BaseRoute}/SaveAppointment", SaveAppointment)
             .WithName("SaveAppointment")
-            .Accepts<SaveAppointmentCommand>(ContentType)
+            //.Accepts<SaveAppointmentRequestDto>(ContentType)
             .Produces<ApiResponse<SaveAppointmentResponseDto>>(200)
             .WithTags(Tag);
     }
 
-    private static async Task<IResult> GetAppointments([FromBody] GetAppointmentsRequestDto request)
+    private static async Task<IResult> GetAppointments([FromServices] IMediator mediator, [FromBody] GetAppointmentsRequestDto request)
     {
-        //var query = new GetAppointmentsQuery
-        //{
-        //    ProviderId = request.ProviderId,
-        //    ServiceIds = request.ServiceIds,
-        //    Year = request.Year,
-        //    Month = request.Month,
-        //    Day = request.Day
-        //};
-        //var response = await mediator.Send(query);
-        return Results.Ok();
+        var query = new GetAppointmentsQuery
+        {
+            ProviderId = request.ProviderId,
+            ServiceIds = request.ServiceIds,
+            Year = request.Year,
+            Month = request.Month,
+            Day = request.Day
+        };
+        var response = await mediator.Send(query);
+        return Results.Ok(response);
     }
 
-    private static async Task<IResult> SaveAppointment([FromBody] GetProviderServicesRequestDto request)
+    private static async Task<IResult> SaveAppointment([FromServices] IMediator mediator, [FromBody] SaveAppointmentRequestDto request)
     {
-        //var response = await mediator.Send(command);
-        //return Results.Ok(response);
-        return Results.Ok();
+        var command = new SaveAppointmentCommand
+        {
+            Year = request.Year,
+            Month = request.Month,
+            Day = request.Day,
+            StartHour = request.StartHour,
+            StartMinute = request.StartMinute,
+            EndHour = request.EndHour,
+            EndMinute = request.EndMinute,
+            TimeSpanMinute = request.TimeSpanMinute,
+            ProviderId = request.ProviderId,
+            ServiceIds = request.ServiceIds,
+            CustomerId = request.CustomerId,
+            Status = request.Status,
+            FirstName = request.FirstName,
+            LastName = request.LastName,
+            Mobile = request.Mobile,
+            Code = request.Code
+        };
+        var response = await mediator.Send(command);
+        return Results.Ok(response);
     }
 }

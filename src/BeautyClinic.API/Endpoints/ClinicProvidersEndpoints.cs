@@ -15,16 +15,16 @@ public class ClinicProviderEndpoints : IEndpoints
 
     public static void DefineEndpoints(IEndpointRouteBuilder app)
     {
-        //app.MapGet(BaseRoute, GetAllClinicProviderAsync)
-        //    .WithName("GetAllClinicProvider")
-        //    .Produces<ApiResponse<List<ClinicProviderDto>>>(200)
-        //    .WithTags(Tag);
+        app.MapGet(BaseRoute, GetAllClinicProviderAsync)
+            .WithName("GetAllClinicProvider")
+            .Produces<ApiResponse<List<ClinicProviderDto>>>(200)
+            .WithTags(Tag);
 
     }
 
-    private static async Task<IResult> GetAllClinicProviderAsync(IMediator mediator, GetAllProvidersQuery query)
+    private static async Task<IResult> GetAllClinicProviderAsync([FromServices]IMediator mediator)
     {
-        var response = await mediator.Send(query);
+        var response = await mediator.Send(new GetAllProvidersQuery());
         return Results.Ok(response);
     }
 }

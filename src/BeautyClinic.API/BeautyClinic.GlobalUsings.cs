@@ -12,5 +12,7 @@ global using global::BeautyClinic.API.Features.Common;
 global using global::FluentValidation;
 global using global::BeautyClinic.API.Endpoints.Internal;
 global using global::Microsoft.AspNetCore.Mvc;
+global using global::System.Net;
+global using global::System.Text.Json;
 
 

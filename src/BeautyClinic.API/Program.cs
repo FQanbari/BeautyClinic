@@ -1,6 +1,5 @@
-using BeautyClinic.API.Endpoints.Internal;
 using BeautyClinic.API.Validators;
-using FluentValidation;
+using Swashbuckle.AspNetCore.Annotations;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,13 +9,17 @@ options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnectio
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(Program).Assembly));
 
 builder.Services.AddValidatorsFromAssemblyContaining<Program>();
-builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
+//builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
 // Add services to the container.
 
 // add swagger
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+//builder.Services.AddSwaggerGen();
 
+builder.Services.AddSwaggerGen(x =>
+{
+    x.EnableAnnotations();
+});
 builder.Services.AddEndpoints<Program>(builder.Configuration);
 
 // add validator
@@ -24,13 +27,18 @@ builder.Services.AddEndpoints<Program>(builder.Configuration);
 
 var app = builder.Build();
 
-app.UseMiddleware<ApiResponseMiddleware>();
+
+app.UseCustomExceptionHandler();
 // Configure the HTTP request pipeline.
 // add swagger
-app.UseSwagger();
+app.UseSwagger(c =>
+{
+    c.OpenApiVersion = Microsoft.OpenApi.OpenApiSpecVersion.OpenApi2_0; 
+});
 app.UseSwaggerUI();
 
-//app.UseHttpsRedirection();
+
+app.UseHttpsRedirection();
 app.UseEndpoints<Program>();
 
 app.Run();
