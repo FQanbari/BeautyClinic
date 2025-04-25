@@ -1,4 +1,6 @@
-﻿namespace BeautyClinic.API.Features.Appointments.GetAppointments;
+﻿using BeautyClinic.API.Common;
+
+namespace BeautyClinic.API.Features.Appointments.GetAppointments;
 
 public class GetAppointmentsQuery : IRequest<ApiResponse<List<AppointmentDto>>>
 {

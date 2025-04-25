@@ -1,4 +1,6 @@
-﻿namespace BeautyClinic.API.Features.Appointments.GetAppointments;
+﻿using BeautyClinic.API.Common;
+
+namespace BeautyClinic.API.Features.Appointments.GetAppointments;
 
 public class GetAppointmentsHandler : IRequestHandler<GetAppointmentsQuery, ApiResponse<List<AppointmentDto>>>
 {
@@ -12,7 +14,8 @@ public class GetAppointmentsHandler : IRequestHandler<GetAppointmentsQuery, ApiR
     public async Task<ApiResponse<List<AppointmentDto>>> Handle(GetAppointmentsQuery request, CancellationToken cancellationToken)
     {
         var date = new DateTime(request.Year, request.Month, request.Day);
-
+        if (!await _dbContext.Providers.AnyAsync(p => p.Id == request.ProviderId, cancellationToken))
+            throw new Exception("Provider not found");
         var appointments = await _dbContext.Appointments
         .Where(a => a.ProviderId == request.ProviderId &&
         a.Date.Date == date.Date &&

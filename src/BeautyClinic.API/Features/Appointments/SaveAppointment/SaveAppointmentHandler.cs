@@ -1,4 +1,5 @@
-﻿using BeautyClinic.API.Features.Appointments.Models;
+﻿
+using BeautyClinic.API.Common.Endpoints.Enums;
 
 namespace BeautyClinic.API.Features.Appointments.SaveAppointment;
 
@@ -14,6 +15,22 @@ public class SaveAppointmentHandler : IRequestHandler<SaveAppointmentCommand, Ap
     public async Task<ApiResponse<SaveAppointmentResponseDto>> Handle(SaveAppointmentCommand request, CancellationToken cancellationToken)
     {
         var date = new DateTime(request.Year, request.Month, request.Day);
+        var existingAppointment = await _dbContext.Appointments
+            .AnyAsync(a => a.ProviderId == request.ProviderId &&
+                           a.Date.Date == date.Date &&
+                           a.StartHour == request.StartHour &&
+                           a.StartMinute == request.StartMinute &&
+                           a.Status == AppointmentStatus.Reserved, cancellationToken);
+        if (existingAppointment)
+            throw new InvalidOperationException("This time slot is already booked.");
+
+        if (!await _dbContext.Providers.AnyAsync(p => p.Id == request.ProviderId, cancellationToken))
+            throw new Exception("Provider not found");
+        if (request.ServiceIds.Any() && !_dbContext.Services
+            .Where(s => request.ServiceIds.Contains(s.Id))
+            .CountAsync(cancellationToken)
+            .Equals(request.ServiceIds.Count))
+            throw new Exception("One or more services not found");
 
         int? customerId = request.CustomerId;
         if (customerId == 0 || customerId == null)

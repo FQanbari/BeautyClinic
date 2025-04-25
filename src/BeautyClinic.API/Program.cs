@@ -1,3 +1,5 @@
+using BeautyClinic.API.Common.Endpoints.Internal;
+using BeautyClinic.API.Common.Middleware;
 using BeautyClinic.API.Validators;
 using Swashbuckle.AspNetCore.Annotations;
 

@@ -1,4 +1,6 @@
-﻿namespace BeautyClinic.API.Features.Appointments.GetAppointments;
+﻿using BeautyClinic.API.Common.Endpoints.Enums;
+
+namespace BeautyClinic.API.Features.Appointments.GetAppointments;
 
 public class AppointmentDto
 {

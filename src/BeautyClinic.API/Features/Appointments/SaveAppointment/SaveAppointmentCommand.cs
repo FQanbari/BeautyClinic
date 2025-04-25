@@ -1,4 +1,7 @@
-﻿namespace BeautyClinic.API.Features.Appointments.SaveAppointment;
+﻿using BeautyClinic.API.Common;
+using BeautyClinic.API.Common.Endpoints.Enums;
+
+namespace BeautyClinic.API.Features.Appointments.SaveAppointment;
 
 public class SaveAppointmentCommand : IRequest<ApiResponse<SaveAppointmentResponseDto>>
 {

@@ -1,4 +1,4 @@
-﻿using BeautyClinic.API.Features.Providers.Models;
+﻿using BeautyClinic.API.Common.Models;
 using FluentAssertions;
 
 namespace BeautyClinic.API.Test.Integration;

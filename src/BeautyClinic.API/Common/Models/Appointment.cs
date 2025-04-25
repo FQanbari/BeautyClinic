@@ -1,24 +1,25 @@
 ﻿using BeautyClinic.API.Common.Endpoints.Enums;
 
-namespace BeautyClinic.API.Features.Appointments.SaveAppointment;
+namespace BeautyClinic.API.Common.Models;
 
-public class SaveAppointmentResponseDto
+public class Appointment
 {
     public int Id { get; set; }
-    public int Year { get; set; }
-    public int Month { get; set; }
-    public int Day { get; set; }
+    public int ProviderId { get; set; }
+    public DateTime Date { get; set; }
     public int StartHour { get; set; }
     public int StartMinute { get; set; }
     public int EndHour { get; set; }
     public int EndMinute { get; set; }
     public int TimeSpanMinute { get; set; }
-    public int ProviderId { get; set; }
-    public int ServiceId { get; set; }
-    public int? CustomerId { get; set; }
     public AppointmentStatus Status { get; set; }
+    public int? CustomerId { get; set; }
     public string? FirstName { get; set; }
     public string? LastName { get; set; }
     public string? Mobile { get; set; }
     public string? Code { get; set; }
+
+    public ClinicProvider ClinicProvider { get; set; } = null!;
+    public Customer? Customer { get; set; }
+    public ICollection<AppointmentService> AppointmentServices { get; set; } = new List<AppointmentService>();
 }
