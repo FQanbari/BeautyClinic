@@ -7,7 +7,7 @@ namespace BeautyClinic.API.Features.Appointments;
 
 public class AppointmentsEndpoints : IEndpoints
 {
-    private const string BaseRoute = "v1/Appointments";
+    private const string BaseRoute = "Appointments";
     private const string ContentType = "application/json";
     private const string Tag = "Appointment";
 
@@ -18,13 +18,13 @@ public class AppointmentsEndpoints : IEndpoints
 
     public static void DefineEndpoints(IEndpointRouteBuilder app)
     {
-        app.MapPost($"${BaseRoute}/GetAppointments", GetAppointments)
+        app.MapPost($"{BaseRoute}/GetAppointments", GetAppointments)
             .WithName("GetAppointments")
             //.Accepts<GetAppointmentsRequestDto>(ContentType)
             .Produces<ApiResponse<List<AppointmentDto>>>(200)
             .WithTags(Tag);
 
-        app.MapPost($"${BaseRoute}/SaveAppointment", SaveAppointment)
+        app.MapPost($"{BaseRoute}/SaveAppointment", SaveAppointment)
             .WithName("SaveAppointment")
             //.Accepts<SaveAppointmentRequestDto>(ContentType)
             .Produces<ApiResponse<SaveAppointmentResponseDto>>(200)

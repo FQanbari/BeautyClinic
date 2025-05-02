@@ -1,7 +1,4 @@
-using BeautyClinic.API.Common.Endpoints.Internal;
 using BeautyClinic.API.Common.Middleware;
-using BeautyClinic.API.Validators;
-using Swashbuckle.AspNetCore.Annotations;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -24,7 +21,8 @@ builder.Services.AddSwaggerGen(x =>
 });
 builder.Services.AddEndpoints<Program>(builder.Configuration);
 
-// add validator
+
+//builder.Services.AddSingleton<AppointmentQueueService>();
 
 
 var app = builder.Build();
