@@ -1,66 +1,150 @@
-# BeautyClinic API
+## 🏥 BeautyClinic API
 
-## Overview
-BeautyClinic API is a RESTful API for managing a beauty clinic, built with ASP.NET Core using **Vertical Slice Architecture (VSA)**, **CQRS**, and **MediatR**. It handles appointments, clinic providers, and services, using Entity Framework Core for database operations and FluentValidation for input validation.
+A **RESTful API** for managing a beauty clinic, built with **ASP.NET Core** using **Minimal APIs**, **Vertical Slice Architecture (VSA)**, **CQRS**, and **MediatR**.
+It supports managing **appointments**, **clinic providers**, and **services**, with **Entity Framework Core** for database operations, **FluentValidation** for input validation, and automated **integration tests** for quality assurance.
 
-## Features
-- **Appointments**: Retrieve (`POST /v1/Appointments/GetAppointments`) and save (`POST /v1/Appointments/SaveAppointment`) appointments.
-- **Clinic Providers**: Get all providers (`GET /ClinicProvider`).
-- **Clinic Services**: Get provider services (`POST /ClinicService`).
-- **Validation**: Input validation with FluentValidation.
-- **Error Handling**: Centralized error handling via middleware.
-- **Database**: SQL Server with seed data.
-- **Endpoint Registration**: Automatic registration using `EndpointExtensions`.
+---
 
-## Project Structure
+### 🚀 Features
+
+✅ **Appointments**
+
+* Retrieve appointments: `POST /Appointments/GetAppointments`
+* Save appointment: `POST /Appointments/SaveAppointment`
+
+✅ **Clinic Providers**
+
+* Get all providers: `GET /ClinicProvider`
+
+✅ **Clinic Services**
+
+* Get provider services: `POST /ClinicService`
+
+✅ **Validation**
+
+* Input validation with **FluentValidation**
+
+✅ **Error Handling**
+
+* Centralized error handling via **custom middleware**
+
+✅ **Database**
+
+* **SQL Server** with seed data
+
+✅ **Minimal API**
+
+* Uses **Minimal API** approach for endpoint registration
+
+✅ **Testing**
+
+* **Integration tests** implemented for end-to-end verification
+
+---
+
+### 🏗️ Architecture
+
+* **ASP.NET Core**
+* **Minimal API**
+* **Entity Framework Core**
+* **MediatR (CQRS)**
+* **FluentValidation**
+* **Vertical Slice Architecture**
+
+👉 See the **C4 Context Diagram** and **Architecture Diagram** for a visual overview.
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/4610f696-714a-4137-bca6-7d49a65a54e4" alt="context-diagram" width="600" />
+</p>
+
+---
+
+### 📁 Project Structure
+
 ```
 BeautyClinic.API/
 ├── Features/
-│   ├── Appointments/          # Appointment features
-│   ├── ClinicProviders/      # Provider features
-│   ├── ClinicServices/       # Service features
-├── Common/                   # Shared code (Models, Responses, Middleware)
-├── Infrastructure/           # Database context
+│   ├── Appointments/
+│   ├── ClinicProviders/
+│   ├── ClinicServices/
+├── Common/
+├── Infrastructure/
+├── Endpoints/
 ├── Program.cs
 ├── appsettings.json
 └── BeautyClinic.API.csproj
 ```
 
-## Technologies
-- ASP.NET Core
-- Entity Framework Core
-- MediatR (CQRS)
-- FluentValidation
-- SQL Server
-- Vertical Slice Architecture
+---
 
-## Setup
-1. Clone the repo: `git clone <repository-url>`
-2. Update `appsettings.json` with your SQL Server connection string.
-3. Apply migrations: `dotnet ef migrations add InitialCreate` and `dotnet ef database update`.
-4. Run: `dotnet run` (default URL: `https://localhost:5001`).
+### ⚙️ Setup
 
-## API Endpoints
-- **Get Appointments**: `POST /v1/Appointments/GetAppointments`
-  - Body: `{"ProviderId": 2, "ServiceIds": [17], "Year": 2025, "Month": 4, "Day": 20}`
-- **Save Appointment**: `POST /v1/Appointments/SaveAppointment`
-  - Body: `{"Year": 2025, "Month": 4, "Day": 20, "StartHour": 12, "StartMinute": 5, ...}`
-- **Get All Providers**: `GET /ClinicProvider`
-- **Get Provider Services**: `POST /ClinicService`
+1. **Clone the repo:**
 
-## Limitations
-- No authentication/authorization.
-- No concurrency handling for bookings.
-- No API documentation (e.g., Swagger).
-- Performance concerns with Reflection in endpoint registration.
-- Limited logging.
+   ```bash
+   git clone https://github.com/FQanbari/BeautyClinic.git
+   ```
 
-## Future Improvements
-- Add authentication (JWT).
-- Handle concurrency for bookings.
-- Integrate Swagger for API documentation.
-- Optimize performance (replace Reflection).
-- Enhance logging.
+2. **Configure database:**
+
+   * Update `appsettings.json` with your SQL Server connection string.
+
+3. **Apply migrations:**
+
+   ```bash
+   dotnet ef migrations add InitialCreate
+   dotnet ef database update
+   ```
+
+4. **Run the app:**
+
+   ```bash
+   dotnet run
+   ```
+
+   Default URL: `https://localhost:5001`
+
+---
+
+### 🧪 Running Tests
+
+Integration tests are located under the `/Tests` folder:
+
+```bash
+dotnet test
+```
+
+✅ Tests cover **API endpoints** and **database interactions**.
+
+---
+
+### 🗺️ API Endpoints
+
+| Action                | Method | URL                              |
+| --------------------- | ------ | -------------------------------- |
+| Get Appointments      | POST   | /Appointments/GetAppointments |
+| Save Appointment      | POST   | /Appointments/SaveAppointment |
+| Get All Providers     | GET    | /ClinicProvider                  |
+| Get Provider Services | POST   | /ClinicService                   |
+
+---
+
+### ⚠️ Known Limitations
+
+* ❌ No authentication/authorization
+* ❌ No concurrency handling for overlapping bookings
+* ❌ No OpenAPI/Swagger documentation
+* ❌ Limited logging
+* ⚠️ Reflection-based endpoint registration may affect performance
+
+---
+
+### 💡 Future Improvements
+
+* Add **JWT Authentication**
+* Implement **concurrency handling**
+* Integrate **Swagger/OpenAPI** for documentation
+* Optimize endpoint registration (remove reflection)
+* Add structured logging with **Serilog**
 
 ## Contributing
 1. Fork the repo.
