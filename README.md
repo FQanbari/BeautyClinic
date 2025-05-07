@@ -141,7 +141,7 @@ dotnet test
 ### 💡 Future Improvements
 
 * Add **JWT Authentication**
-* Implement **concurrency handling**
+* Implement **concurrency handling** to prevent *Race Condition*
 * Integrate **Swagger/OpenAPI** for documentation
 * Optimize endpoint registration (remove reflection)
 * Add structured logging with **Serilog**
